@@ -1,0 +1,20 @@
+.custom-bg-primary {
+  background-color: #232c33;
+}
+
+.custom-bg-secondary {
+  background-color: #b9e3c6;
+}
+
+.custom-btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.custom-dialog {
+  max-width: 60% !important;
+}
