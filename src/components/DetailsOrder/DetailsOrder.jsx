@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Row, Form, Col, ListGroup, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { v4 as uuidv4 } from "uuid";
 //-- components
 import DetailsTable from "../Tables/DetailsTable";
 //-- functions
@@ -9,7 +10,7 @@ import TransformNumberToMiles from "../../functions/TransformNumberToMiles";
 import Headers_details_order from "../../constant/Headers/headers_details_order";
 import Establecimientos from "../../constant/Establecimientos";
 
-const DetailsOrder = ({items, isEditMode}) => {
+const DetailsOrder = ({ items, isEditMode, InsertOrder, ModifyOrder, DeleteOrder }) => {
   const headers_details_order = Headers_details_order;
   const establecimientos = Establecimientos;
 
@@ -20,6 +21,7 @@ const DetailsOrder = ({items, isEditMode}) => {
 
   //-- useState
   const [ItemsOrder, setItemsOrder] = useState(items);
+  const [isOkDelete, setisOkDelete] = useState(false)
   const [Establecimiento, setEstablecimiento] = useState({
     id: -1,
     nombre: "",
@@ -56,6 +58,20 @@ const DetailsOrder = ({items, isEditMode}) => {
       manga: "",
       basta: "",
     });
+  };
+
+  const ChangeStateItem = (id) => {
+    const result = ItemsOrder.map(function (e) {
+      if (e.id === id) {
+        e.terminado = !e.terminado;
+      }
+
+      return e;
+    })
+
+    setItemsOrder(result);
+
+    console.log(ItemsOrder);
   };
 
   const CalculateTotalOrder = () => {
@@ -143,9 +159,15 @@ const DetailsOrder = ({items, isEditMode}) => {
     setItemsOrder(result);
   };
 
+  const handlerDeleteInput = (event) => {
+    event.target.value === 'eliminar pedido' ? setisOkDelete(true) : setisOkDelete(false);
+  }
+
   const PushDetailsOrder = () => {
     let obj = {};
 
+    obj.id = uuidv4();
+    obj.terminado = false;
     obj.establecimiento = Establecimiento.nombre;
     obj.prenda = Prenda.nombre;
     obj.talla = Talla.nombre;
@@ -313,6 +335,7 @@ const DetailsOrder = ({items, isEditMode}) => {
                   headers={headers_details_order}
                   items={ItemsOrder}
                   SpliceItemOrder={SpliceItemOrder}
+                  ChangeStateItem={ChangeStateItem}
                   isEditMode={isEditMode}
                 />
               </ListGroup.Item>
@@ -327,6 +350,33 @@ const DetailsOrder = ({items, isEditMode}) => {
               </ListGroup.Item>
             </ListGroup>
           </Card>
+        </Col>
+      </Row>
+      <br />
+      <Row >
+        <Col sm={5}>
+          <div className='d-flex'>
+            <Form.Control onChange={handlerDeleteInput} name="confirmationText" placeholder='Escribe "eliminar pedido"'/>
+            <Button onClick={() => DeleteOrder()} className='ml-2' variant={isOkDelete ? 'danger': 'secondary'} disabled={!isOkDelete}>Eliminar</Button>
+          </div>
+          <p className='body text-secondary'>Si eliminas este pedido, no hay vuelta atras. Piensalo bien !</p>
+        </Col>
+        <Col sm={{ span: 3, offset: 4 }} className='align-right'>
+          <div className='d-flex justify-content-end'>
+            {
+              !isEditMode ? (
+                <Button className='justify-content-end' onClick={() => InsertOrder({ ItemsOrder, Total })} variant="success">
+                  <FontAwesomeIcon className="mr-3" icon="sign-in-alt" />
+            Ingresar Pedido
+                </Button>
+              ) : (
+                  <Button className='text-white font-weight-bold' onClick={() => ModifyOrder({ ItemsOrder, Total })} variant="warning">
+                    <FontAwesomeIcon className="mr-3" icon="check" />
+                    Confirmar edicion
+                  </Button>
+                )
+            }
+          </div>
         </Col>
       </Row>
     </Fragment>

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const DetailsTable = ({ headers, items, SpliceItemOrder, isEditMode }) => {
+const DetailsTable = ({ headers, items, SpliceItemOrder, isEditMode, ChangeStateItem }) => {
   return (
     <Fragment>
       <Table striped bordered hover size="sm">
@@ -20,8 +20,9 @@ const DetailsTable = ({ headers, items, SpliceItemOrder, isEditMode }) => {
                 {isEditMode ? (
                   <td>
                     <input
-                      checked={e.terminado}
+                      defaultChecked={e.terminado}
                       type="checkbox"
+                      onClick={() => ChangeStateItem(e.id)}
                       style={{
                         width: "2rem",
                         height: "1.2rem",

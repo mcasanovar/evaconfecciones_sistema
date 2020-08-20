@@ -4,8 +4,10 @@ import { Card, ListGroup, Badge, Button } from "react-bootstrap";
 import TransformNumberToMiles from "../../functions/TransformNumberToMiles";
 //-- components
 import EditOrder from "../Modals/EditOrder";
+import ProgressBar from "../ProgressBar/ProgressBar";
 
 const CardDetails = ({ item }) => {
+  //-- useState
   const [stateOpenDialog, setStateOpenDialog] = useState(false);
 
   const openDialog = () => setStateOpenDialog(true);
@@ -66,16 +68,23 @@ const CardDetails = ({ item }) => {
           </h5>
         </Card.Body>
         <Card.Body>
+          {/* Progress Bar with the progress of the order */}
+          <ProgressBar TotalPercentage={item.porcentaje_avance} />
+          {/* -------------- */}
+        </Card.Body>
+        <Card.Body>
           <Button onClick={openDialog} block variant="outline-info">
             Detalle
           </Button>
         </Card.Body>
       </Card>
-      <EditOrder
-        stateOpenDialog={stateOpenDialog}
-        closeDialog={closeDialog}
-        item={item}
-      />
+      <div className='EditOrder'>
+        <EditOrder
+          stateOpenDialog={stateOpenDialog}
+          closeDialog={closeDialog}
+          item={item}
+        />
+      </div>
     </Fragment>
   );
 };

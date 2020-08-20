@@ -2,18 +2,19 @@ export default [
     {
         _id: 'HGHG56563TD5DFGD535GD',
         numero: 1,
-        id_cliente: 'HH66RFFTFE6DGDT',
         nombre_cliente: 'Mario Casanova Ramirez',
         rut_cliente: '17642868-6',
         telefono_cliente: '951282015',
         estado_pedido: 'En Proceso',
         color_proceso: 'warning',
-        fecha_pedido: '2020-05-15',
+        fecha_pedido: '01-07-2020',
         comentario: 'Pedido Normal',
-        fecha_entrega: '2020-07-03',
+        fecha_entrega: '03-agosto-2020',
         total: 5900,
+        porcentaje_avance: 0,
         detalle: [
             {
+                id: 'KJBHF655DVDFRWV3',
                 terminado: false,
                 establecimiento: 'Santa Teresa',
                 prenda: 'Falda',
@@ -31,18 +32,19 @@ export default [
     {
         _id: 'HHYTGF6653FD5DGHF64',
         numero: 2,
-        id_cliente: 'HH66RFFTFE6DGDT',
         nombre_cliente: 'Mario Casanova Ramirez',
         rut_cliente: '17642868-6',
         telefono_cliente: '951282015',
         estado_pedido: 'Completado',
         color_proceso: 'success',
-        fecha_pedido: '2020-05-15',
+        fecha_pedido: '03-05-2020',
         comentario: 'Pedido Normal',
-        fecha_entrega: '2020-07-03',
+        fecha_entrega: '05-marzo-2020',
         total: 10800,
+        porcentaje_avance: 100,
         detalle: [
             {
+                id: 'JCCHF37HCFG6SDG6666FGF',
                 terminado: true,
                 establecimiento: 'Santa Teresa',
                 prenda: 'Falda',
@@ -56,7 +58,8 @@ export default [
                 basta: ''
             },
             {
-                terminado: false,
+                id: 'KJBHFSFWEJKIFJDIJ655DVDFRWV3',
+                terminado: true,
                 establecimiento: 'Santa Teresa',
                 prenda: 'Falda',
                 talla: '2',

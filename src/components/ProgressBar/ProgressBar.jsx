@@ -1,19 +1,24 @@
-import React, { Fragment } from "react";
-import { ListGroup, Row, Col, ProgressBar } from "react-bootstrap";
+import React, { Fragment, useState, useEffect } from "react";
+import { Row, Col, ProgressBar } from "react-bootstrap";
 
 const Bar = ({ TotalPercentage }) => {
+
+  //-- useState
+  const [Percentage, setPercentage] = useState(0);
+
+  //-- useEffect
+  useEffect(() => {
+    setPercentage(TotalPercentage);
+  }, [TotalPercentage])
+
   return (
     <Fragment>
-      <ListGroup variant="flush">
-        <ListGroup.Item>
-          <Row>
-            <Col>
-              <p className="text-center font-weight-bold">{TotalPercentage}%</p>
-              <ProgressBar animated now={TotalPercentage} variant="success" />
-            </Col>
-          </Row>
-        </ListGroup.Item>
-      </ListGroup>
+      <Row>
+        <Col>
+          <p className="text-center font-weight-bold">{Percentage}%</p>
+          <ProgressBar animated now={Percentage} variant="success" />
+        </Col>
+      </Row>
     </Fragment>
   );
 };
