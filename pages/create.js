@@ -5,7 +5,6 @@ import InputComponent from '../components/input'
 import DropdownComponent from '../components/dropdown'
 
 const CreateOrder = () => {
-  
   return (
     <LayoutComponent>
       <div className="w-full min-h-screen flex justify-center items-start">
